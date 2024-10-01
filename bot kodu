@@ -1,0 +1,36 @@
+import discord
+from discord.ext import commands
+import random  # Rastgele seçim yapmak için
+
+
+intents = discord.Intents.default()
+intents.message_content = True  # Mesaj içeriğine erişim izni
+
+
+bot = commands.Bot(command_prefix='!', intents=intents)
+
+
+cevaplar = [
+    "Malzemeler: Plastik şişeler, kapaklar, poşetler.\nFikirler: Plastik şişelerden saksı yapabilirler, kapaklardan mozaik sanat eserleri oluşturabilirler. Poşetleri ise yeniden kullanılabilir alışveriş çantalarına dönüştürebilirler.",
+    "Malzemeler: Eski dergiler, gazeteler, karton kutular.\nFikirler: Kağıtları kâğıt hamuru yaparak kendi defterlerini ya da sanat eserlerini oluşturabilirler. Karton kutuları küçük saklama kutuları veya oyuncaklara dönüştürebilirler.",
+    "Malzemeler: Eski cam kavanozlar, şişeler.\nFikirler: Cam şişeleri dekoratif vazolara, mumluklara ya da lamba tasarımlarına dönüştürebilirler.",
+    "Malzemeler: Yemek artıkları, sebze ve meyve kabukları.\nFikirler: Bahçesi olanlar organik atıklardan kompost yaparak bitki yetiştirmek için doğal gübre elde edebilirler.",
+    "Malzemeler: Eski tişörtler, kot pantolonlar.\nFikirler: Eski kıyafetlerden bez torbalar, yeni moda parçaları ya da yastık kılıfları yapabilirler.",
+    "Malzemeler: Bozulmuş elektronik eşyalar, kablolar.\nFikirler: Elektronik atıklardan sanat eserleri oluşturabilir, eski parçaları kullanarak basit robotik projeler yapabilirler.",
+    "Malzemeler: Boncuk, tel, düğme, plastik parçalar.\nFikirler: Eski düğmelerden, telden veya plastik parçalardan kolye, bileklik ve küpeler tasarlayabilirler."
+]
+
+
+@bot.event
+async def on_ready():
+    print(f'Bot {bot.user} olarak giriş yaptı!')
+
+
+@bot.command()
+async def ne_yapabilirim(ctx):
+    
+    cevap = random.choice(cevaplar)
+    await ctx.send(cevap)
+
+
+bot.run
